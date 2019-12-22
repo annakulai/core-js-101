@@ -186,8 +186,13 @@ function isInsideCircle(circle, point) {
  *   'abracadabra'  => 'c'
  *   'entente' => null
  */
-function findFirstSingleChar(/* str */) {
-  throw new Error('Not implemented');
+function findFirstSingleChar(string) {
+  for (let i = 0; i < string.length; i += 1) {
+    if (string.match(new RegExp(string[i], 'g')).length === 1) {
+      return string[i];
+    }
+  }
+  return null;
 }
 
 
@@ -387,8 +392,17 @@ function isBracketsBalanced(str) {
  *    365, 4  => '11231'
  *    365, 10 => '365'
  */
-function toNaryString(/* num, n */) {
-  throw new Error('Not implemented');
+function toNaryString(num, n) {
+  const result = [];
+  let currentNum = num;
+  while (currentNum >= n - 1) {
+    result.unshift((currentNum % n).toString());
+    currentNum = Math.floor(currentNum / n);
+  }
+  if (currentNum) {
+    result.unshift(currentNum);
+  }
+  return result.join('');
 }
 
 

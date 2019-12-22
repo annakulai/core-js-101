@@ -418,8 +418,16 @@ function toNaryString(num, n) {
  *   ['/web/assets/style.css', '/.bin/mocha',  '/read.me'] => '/'
  *   ['/web/favicon.ico', '/web-scripts/dump', '/webalizer/logs'] => '/'
  */
-function getCommonDirectoryPath(/* pathes */) {
-  throw new Error('Not implemented');
+function getCommonDirectoryPath(pathes) {
+  const words = pathes.map((el) => el.split('/'));
+  const path = [];
+  for (let i = 0; i < words[0].length; i += 1) {
+    const temp = words[0][i];
+    if (words.every((el) => el[i] === temp)) {
+      path.push(words[0][i]);
+    }
+  }
+  return (path.length > 0) ? `${path.join('/')}/` : '';
 }
 
 
@@ -488,24 +496,20 @@ function getMatrixProduct(m1, m2) {
  *    [    ,   ,    ]]
  *
  */
-function evaluateTicTacToePosition(/* position */) {
-  throw new Error('Not implemented');
-/*   for (let i = 0; i < position.length; i += 1) {
-    if ((position[i][0] === position[i][1]) && (position[i][0] === position[i][2])) {
+function evaluateTicTacToePosition(position) {
+  for (let i = 0; i < 3; i += 1) {
+    if (position[i][0] && position[i][0] === position[i][1] && position[i][1] === position[i][2]) {
       return position[i][0];
     }
-  }
-
-  for (let j = 0; j < position.length; j += 1) {
-    if ((position[0][j] === position[1][j]) && (position[0][j] === position[2][j])) {
-      return position[0][j];
+    if (position[0][i] && position[0][i] === position[1][i] && position[1][i] === position[2][i]) {
+      return position[0][i];
     }
   }
-
-  if ((position[0][0] === position[1][1] && position[0][0] === position[2][2])
-      || (position[0][2] === position[1][1] && position[0][2] === position[2][0])) {
+  if ((position[0][0] === position[1][1] && position[1][1] === position[2][2])
+    || (position[0][2] === position[1][1] && position[1][1] === position[2][0])) {
     return position[1][1];
-  } */
+  }
+  return undefined;
 }
 
 
